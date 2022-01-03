@@ -198,15 +198,33 @@ function clientTimeout()
 
 end
 
+function mp.boxDataFilter(objData)
+  return {
+    ["x"]=objData["x"], 
+    ["y"]=objData["y"], 
+    ["z"]=objData["z"], 
+    ["color"]=objData["color"]
+  }
+end
+
+function mp.handleWorldData(data)
+  if data["action"] == "add" then
+    local boxData = mp.boxDataFilter(data)
+    print(boxData)
+    table.insert(mp.world.boxes, boxData)
+  elseif data["action"] == "removeAll" then
+    mp.world.boxes = {}
+  end
+end
+
 function mp.addBox(x, y, z, color)
   local data = {
     ["action"]="add",
     ["id"] = mp.playerId,
-    -- ["boxId"] = tostring(mp.world.boxes)..tostring(mp.playerId),
     ["x"]=x, 
     ["y"]=y, 
     ["z"]=z, 
-    ["color"]=color 
+    ["color"]=color
   }
   mp.handleWorldData(data)
   local data = {}
@@ -231,24 +249,6 @@ function mp.removeAllBox()
   end
 end
 
-function mp.boxDataFilter(objData)
-  return {
-    ["x"]=objData["x"], 
-    ["y"]=objData["y"], 
-    ["z"]=objData["z"], 
-    ["color"]=objData["color"] 
-  }
-end
-
-function mp.handleWorldData(data)
-  if data["action"] == "add" then
-    local boxData = mp.boxDataFilter(data)
-    table.insert(mp.world.boxes, boxData)
-  elseif data["action"] == "removeAll" then
-    mp.world = {}
-  end
-end
-
 -- Host listen and update the world to the relevant clients
 function mp.hostListenWorld(data)
   mp.handleWorldData(data)
@@ -268,19 +268,19 @@ end
 
 function mp.handleMultiplayer(msg, held_ch)
   if mp.isHost then
-        if msg["type"] == "initReq" and held_ch == mp.initChannel then
-          mp.hostListenDevices(msg["obj"])
-        elseif msg["type"] == "world" and msg["obj"]["id"] ~= nil then
-          -- Host receive data from client and broadcast to the rest
-          print("Host Listened")
-          mp.hostListenWorld(msg["obj"])
-        end
-      else
-        if msg["type"] == "clientWorld" and held_ch == mp.hostChannel then
-          -- Client doesn't send back data but only render the world
-          mp.clientListenWorld(msg["obj"])
-        end
-      end
+    if msg["type"] == "initReq" and held_ch == mp.initChannel then
+      mp.hostListenDevices(msg["obj"])
+    elseif msg["type"] == "world" and msg["obj"]["id"] ~= nil then
+      -- Host receive data from client and broadcast to the rest
+      print("Host Listened")
+      mp.hostListenWorld(msg["obj"])
+    end
+  else
+    if msg["type"] == "clientWorld" and held_ch == mp.hostChannel then
+      -- Client doesn't send back data but only render the world
+      mp.clientListenWorld(msg["obj"])
+    end
+  end
 end
 
 return mp
