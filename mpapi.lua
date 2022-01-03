@@ -264,8 +264,8 @@ end
 function mp.clientListenWorld(data)
   mp.handleWorldData(data)
 end
--- Client can see host new blocks but host cannot see client blocks
--- Host cannot remove client blocks but client can
+
+
 function mp.handleMultiplayer(msg, held_ch)
   if mp.isHost then
     if msg["type"] == "initReq" and held_ch == mp.initChannel then

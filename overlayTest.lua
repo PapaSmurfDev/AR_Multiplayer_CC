@@ -192,6 +192,12 @@ local function renderBoxes()
   updateStatus(mp.hostChannel, #mp.world.boxes)
 end
 
+local function renderNewBox()
+  local box = mp.world.boxes[#mp.world.boxes]
+  canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], box.color)
+  updateStatus(mp.hostChannel, #mp.world.boxes)
+end
+
 local function addBoxButton()
   local curx, cury, curz = gps.locate()
   if isNumber(curx) and isNumber(cury) and isNumber(curz) then
@@ -205,7 +211,8 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
     if event == "key" then
       if key_side == keys.c then
         addBoxButton()
-        renderBoxes()
+        renderNewBox()
+        -- renderBoxes()
       elseif key_side == keys.x then
         print("Remove all boxes")
         mp.removeAllBox()
@@ -223,7 +230,12 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
       end
     elseif event == "modem_message" then
       mp.handleMultiplayer(msg, held_ch)
-      renderBoxes()
+      -- renderBoxes()
+      if(msg["obj"]["action"] == "removeAll") then
+        renderBoxes()
+      else
+        renderNewBox()
+      end
     end
 end
 
