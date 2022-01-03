@@ -189,7 +189,7 @@ local function renderBoxes()
   for i,box in ipairs(mp.world.boxes) do
     canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], box.color)
   end
-  -- updateStatus(mp.hostChannel, #mp.world.boxes)
+  updateStatus(mp.hostChannel, #mp.world.boxes)
 end
 
 local function addBoxButton()
