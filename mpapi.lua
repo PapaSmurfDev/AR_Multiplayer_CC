@@ -274,13 +274,11 @@ function mp.handleMultiplayer(msg, held_ch)
           -- Host receive data from client and broadcast to the rest
           print("Host Listened")
           mp.hostListenWorld(msg["obj"])
-          renderBoxes()
         end
       else
         if msg["type"] == "clientWorld" and held_ch == mp.hostChannel then
           -- Client doesn't send back data but only render the world
           mp.clientListenWorld(msg["obj"])
-          renderBoxes()
         end
       end
 end

@@ -222,6 +222,7 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
       end
     elseif event == "modem_message" then
       mp.handleMultiplayer(msg, held_ch)
+      renderBoxes()
     end
 end
 
