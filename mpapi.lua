@@ -225,7 +225,7 @@ function mp.addBox(x, y, z, color)
     ["z"]=z, 
     ["color"]=color
   }
-  print(data)
+  printTbl(data)
   mp.handleWorldData(data)
   local data = {}
   if mp.isHost then
