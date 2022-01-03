@@ -154,7 +154,7 @@ local function updateStatus(channel, boxCount)
       { ["func"]=writeCenter, { ["str"]="Press b to quit the program", ["yLoc"]=0 } }
     }
 
-    -- term.clear()
+    term.clear()
 
     for i=1, #status do
       status[i][1]["yLoc"] = i
