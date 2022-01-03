@@ -104,6 +104,7 @@ local deviceInit = false
 
 
 term.clear()
+term.setCursorPos(1,1)
 while not deviceInit do
   mp.initDevice()
 

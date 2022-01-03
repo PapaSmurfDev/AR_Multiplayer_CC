@@ -211,6 +211,7 @@ function mp.handleWorldData(data)
   if data["action"] == "add" then
     local boxData = mp.boxDataFilter(data)
     table.insert(mp.world.boxes, boxData)
+    printTbl(mp.world)
   elseif data["action"] == "removeAll" then
     mp.world.boxes = {}
   end
@@ -225,7 +226,6 @@ function mp.addBox(x, y, z, color)
     ["z"]=z, 
     ["color"]=color
   }
-  printTbl(data)
   mp.handleWorldData(data)
   local data = {}
   if mp.isHost then
