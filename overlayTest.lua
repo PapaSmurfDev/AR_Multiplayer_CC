@@ -102,6 +102,8 @@ end
 
 local deviceInit = false
 
+
+term.clear()
 while not deviceInit do
   mp.initDevice()
 
