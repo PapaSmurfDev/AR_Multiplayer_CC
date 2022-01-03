@@ -50,6 +50,6 @@ This script is an updater, it auto clones the repo onto itself using the github 
 - B : Exit program
 
 
-#### Required Modules for fly:
+#### Required Modules for start:
 * Keyboard
 * Overlay Glasses
