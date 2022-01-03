@@ -221,7 +221,7 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
         end
       end
     elseif event == "modem_message" then
-      mp.handleMultiplyer(msg, held_ch)
+      mp.handleMultiplayer(msg, held_ch)
     end
 end
 
