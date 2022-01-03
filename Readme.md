@@ -27,7 +27,7 @@ git clone PapaSmurfDev/AR_Multiplayer_CC
 
 ```
 
-This will clone the whole repo into a CC-Plethora-Scripts directory.
+This will clone the whole repo into a AR_Multiplayer_CC directory.
 
 ### 3. Update the repo
 
@@ -50,6 +50,6 @@ This script is an updater, it auto clones the repo onto itself using the github 
 - B : Exit program
 
 
-#### Required Modules for fly:
+#### Required Modules to start:
 * Keyboard
 * Overlay Glasses
