@@ -226,7 +226,7 @@ function mp.addBox(x, y, z, color)
     ["color"]=color
   }
   mp.handleWorldData(data)
-  local data = {}
+
   if mp.isHost then
     mp.sendData("clientWorld", data, mp.hostChannel)
   else
@@ -251,7 +251,7 @@ end
 -- Host listen and update the world to the relevant clients
 function mp.hostListenWorld(data)
   mp.handleWorldData(data)
-  printTbl(data)
+
   print("ID:", data["id"])
   for i, id in ipairs(mp.players) do
     if id ~=  data["id"] then
@@ -262,25 +262,22 @@ end
 
 -- Client listen and update the world
 function mp.clientListenWorld(data)
-  printTbl(data)
   mp.handleWorldData(data)
 end
-
+-- Client can see host new blocks but host cannot see client blocks
+-- Host cannot remove client blocks but client can
 function mp.handleMultiplayer(msg, held_ch)
   if mp.isHost then
     if msg["type"] == "initReq" and held_ch == mp.initChannel then
-      printTbl(msg["obj"])
       mp.hostListenDevices(msg["obj"])
     elseif msg["type"] == "world" and msg["obj"]["id"] ~= nil then
       -- Host receive data from client and broadcast to the rest
       print("Host Listened")
-      printTbl(msg["obj"])
       mp.hostListenWorld(msg["obj"])
     end
   else
     if msg["type"] == "clientWorld" and held_ch == mp.hostChannel then
       -- Client doesn't send back data but only render the world
-      printTbl(msg["obj"])
       mp.clientListenWorld(msg["obj"])
     end
   end
