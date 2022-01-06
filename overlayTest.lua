@@ -81,7 +81,7 @@ local function initCanvas()
     end
   end
 
-  canvas = modules.canvas3d().create({0,0,0})
+  canvas = modules.canvas3d().create({curx-mp.userRoot[1],cury-mp.userRoot[2],curz-mp.userRoot[3]})
   canvas.clear()
 
   ui_canvas = modules.canvas()
@@ -229,12 +229,14 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
         end
       end
     elseif event == "modem_message" then
-      mp.handleMultiplayer(msg, held_ch)
+      mp.handleMultiplayer(msg, held_ch, renderBoxes, renderNewBox)
       -- renderBoxes()
-      if(msg["obj"]["action"] == "removeAll") then
-        renderBoxes()
-      else
-        renderNewBox()
+      if held_ch == mp.hostChannel and (msg["type"] == "clientWorld" or msg["type"] == "world") then
+        if(msg["obj"]["action"] == "removeAll") then
+          renderBoxes()
+        else
+          renderNewBox()
+        end
       end
     end
 end
