@@ -68,6 +68,9 @@ local function addBox(x,y,z,color)
 end
 
 local function isNumber(coor)
+  if coor == nil then
+    return false
+  end
   return coor == coor
 end
 
