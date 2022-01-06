@@ -43,11 +43,15 @@ pull
 
 This script is an updater, it auto clones the repo onto itself using the github script aforementioned.
 
+### How it looks
+
+![VIpwTTx](https://user-images.githubusercontent.com/96831364/148427290-0ca3c1c8-f10c-4b12-b373-84dc9916ae6a.png)
+
 ### Basic Controls
 
 - C : Place blocks
 - X : Remove blocks
-- B : Exit program
+- M : Exit program
 
 
 #### Required Modules to start:
