@@ -81,7 +81,7 @@ local function initCanvas()
     end
   end
 
-  canvas = modules.canvas3d().create({curx-mp.userRoot[1],cury-mp.userRoot[2],curz-mp.userRoot[3]})
+  canvas = modules.canvas3d().create({mp.userRoot[1]-curx,0,mp.userRoot[3]-curz})
   canvas.clear()
 
   ui_canvas = modules.canvas()
