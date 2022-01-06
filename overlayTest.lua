@@ -55,8 +55,8 @@ end
 local function addBox(x,y,z,color)
   if x ~= nil and y ~= nil and z ~= nil then
     y = math.floor(y) - 1.7
-    x = math.floor(x) - 0.65
-    z = math.floor(z) - 0.82
+    x = math.floor(x)
+    z = math.floor(z)
     if not color then
       color = tonumber(generateRandomColor(), 16)
     end
@@ -218,6 +218,7 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
         mp.removeAllBox()
         renderBoxes()
       elseif key_side == keys.m then
+        os.pullEvent()
         mp.world = {}
         print("stopping program")
         canvas.clear()
