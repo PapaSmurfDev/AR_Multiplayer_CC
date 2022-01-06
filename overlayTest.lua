@@ -9,7 +9,7 @@ if modem == nil then
 else
   wireless = true
 end
-
+local boxSize = 1
 local mp = require("mpapi") -- Custom written multiplayer api
 
 --- Now we've got our neural interface, let's extract the canvas and ensure nothing else is on it.
@@ -187,14 +187,14 @@ end
 local function renderBoxes()
   canvas.clear()
   for i,box in ipairs(mp.world.boxes) do
-    canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], box.color)
+    canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], boxSize, boxSize, boxSize, box.color)
   end
   updateStatus(mp.hostChannel, #mp.world.boxes)
 end
 
 local function renderNewBox()
   local box = mp.world.boxes[#mp.world.boxes]
-  canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], box.color)
+  canvas.addBox(box.x-mp.userRoot[1], box.y-mp.userRoot[2], box.z-mp.userRoot[3], boxSize, boxSize, boxSize, box.color)
   updateStatus(mp.hostChannel, #mp.world.boxes)
 end
 
@@ -242,12 +242,21 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
     end
 end
 
+
 term.clear()
 term.setCursorPos(1,1)
+local size_input
+while true do
+  print("Please input a size of box <0.01 - 3>")
+  size_input = read()
+  if tonumber(size_input) then
+    boxSize = tonumber(size_input)
+    break
+  end
+end
 initCanvas()
 
 running = true
-
 renderBoxes()
 while running do
   os.startTimer(1)
