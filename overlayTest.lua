@@ -154,7 +154,7 @@ local function updateStatus(channel, boxCount)
       { ["func"]=drawDivider,  { ["sym"]="*" } },
       { ["func"]=writeCenter, { ["str"]="Press c to place a block", ["yLoc"]=0 } },
       { ["func"]=writeCenter, { ["str"]="Press x to remove all blocks", ["yLoc"]=0 } },
-      { ["func"]=writeCenter, { ["str"]="Press b to quit the program", ["yLoc"]=0 } }
+      { ["func"]=writeCenter, { ["str"]="Press m to quit the program", ["yLoc"]=0 } }
     }
 
     term.clear()
@@ -217,7 +217,7 @@ local function mainLoop(event, key_side, held_ch, rch, msg, dist)
         print("Remove all boxes")
         mp.removeAllBox()
         renderBoxes()
-      elseif key_side == keys.b then
+      elseif key_side == keys.m then
         mp.world = {}
         print("stopping program")
         canvas.clear()
